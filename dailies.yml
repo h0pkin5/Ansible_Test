@@ -1,0 +1,12 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: update and clean cache (Debian, Ubuntu)
+    apt:
+      update_cache: yes
+      upgrade: dist
+      auoclean: yes
+    when: ansible_distribution in ["Ubuntu", "Debian"]
