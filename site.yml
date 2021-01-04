@@ -1,0 +1,43 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: update and upgrade (Debian, Ubuntu)
+    tags: daily
+    apt:
+      update_cache: yes
+      upgrade: dist
+    when: ansible_distribution in ["Ubuntu", "Debian"]
+
+  - name: update and upgrade (Fedora, CentOS, SUSE, RedHat)
+    tags: daily
+    dnf:
+      update_cache: yes
+    when: ansible_distribution in ["Fedora", "CentOS", "SUSE", "RedHat"]
+
+- hosts: all
+  become: true
+  roles:
+    - base
+
+- hosts: workstation
+  become: true
+  roles:
+    - workstation
+
+- hosts: db_server
+  become: true
+  roles:
+    - db_server
+
+- hosts: web_server
+  become: true
+  roles:
+    - web_server
+
+- hosts: test_server
+  become: true
+  roles:
+    - test_server
