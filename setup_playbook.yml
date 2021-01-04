@@ -5,7 +5,7 @@
   tasks:
 
   - name: Basic Linux tools set up (Debain, Ubuntu)
-    tags: debian,ubunu,basic,tools
+    tags: debian,ubuntu,basic,tools
     apt:
       name:
         - tmux
