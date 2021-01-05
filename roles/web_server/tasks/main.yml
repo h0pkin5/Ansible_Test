@@ -1,0 +1,19 @@
+- name: apache2 and php set up (Ubuntu, Debian)
+  tags: apache,ubuntu,debian,setup
+  apt:
+    name:
+      - apache2
+      - libapache2-mod-php
+    update_cache: yes
+  when: ansible_distribution in ["Ubuntu", "Debian"]
+
+- name: httpd and php set up (Fedora, CentOS, RedHat)
+  tags: httpd,setup,fedora,centos,redhat
+  dnf:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  with_items:
+    - httpd
+    - php
+  when: ansible_distribution in ["Fedora", "CentOS", "RedHat"]

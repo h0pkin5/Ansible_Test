@@ -1,0 +1,16 @@
+- name: install mongodb (Ubuntu, Debian)
+  tag: mongodb,apt,setup
+  apt:
+    name: mongodb
+    state: present
+    update_cache: yes
+  when: ansible_distribution in ["Ubuntu", "Debian"]
+
+- name: install mongodb (fedora,centos,redhat)
+  tag: mongodb,dnf,setup
+  dnf:
+    name: mongodb
+    state: present
+    update_cache: yes
+  when: ansible_distribution in ["Fedora", "CentOS", "RedHat"]
+
