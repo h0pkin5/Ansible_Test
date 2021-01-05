@@ -1,0 +1,20 @@
+- name: set up worker
+  tag: initial,setup
+  user:
+    name: worker
+    password: "{{ password_var }}"
+
+- name: set ssh key
+  tag: initial,setup
+  authorized_key:
+    user: worker
+    key: "{{ key }}"
+    state: present
+
+- name: add worker to sudo
+  tags: initial,setup
+  copy:
+    src: sudoer_worker
+    dest: /etc/sudoers.d/worker
+    
+
